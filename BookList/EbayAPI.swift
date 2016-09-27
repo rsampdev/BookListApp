@@ -67,4 +67,11 @@ internal struct EbayAPI {
         return item
     }
     
+    static func convertUnsecureURLIntoSecureURL(_ url: URL) -> URL {
+        var secureURL: URL? = nil
+        var components = URLComponents(string: url.absoluteString)
+        components?.scheme = "https"
+        secureURL = components?.url
+        return secureURL!
+    }
 }

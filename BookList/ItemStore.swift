@@ -83,7 +83,7 @@ class ItemStore {
             withCompletion(image!);
             return image;
         }
-        let request = URLRequest(url: item.imageURL!)
+        let request = URLRequest(url: EbayAPI.convertUnsecureURLIntoSecureURL(item.imageURL!))
         let task = self.session.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
             if data != nil {
                 let requestImage = self.processImageRequestWithData(data!)
