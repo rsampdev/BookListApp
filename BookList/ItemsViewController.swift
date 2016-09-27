@@ -54,7 +54,8 @@ class ItemsViewController: UIViewController, UITableViewDataSource {
             cell.authorLabel?.isHidden = false
         }
         if item?.imageURL == nil{
-            cell.itemImageView?.isHidden = true
+//            cell.itemImageView?.isHidden = true
+            cell.itemImageView?.backgroundColor = UIColor.red
         } else {
             cell.imageView?.image = self.imageStore?.imageForKey((item?.imageKey!)!)
             cell.itemImageView?.isHidden = false

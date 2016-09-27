@@ -54,6 +54,7 @@ class CoreDataStack {
         return docsURL!
     }
     
+    @discardableResult
     func saveChanges(error: Error?) -> Bool {
         var success = false;
         self.privateQueueContext.performAndWait {

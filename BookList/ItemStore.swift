@@ -25,11 +25,16 @@ class ItemStore {
     }
     
     func fetchItemsWithCompletion(completion: @escaping ([Item]) -> Void ) {
-        let urlString = ebayAPI.ebayURL
+        let urlString = EbayAPI.ebayURL
         let url = URL(string: urlString)
         let request = URLRequest(url: url!)
         let task = self.session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             let items = self.processItemsRequestWithData(data, error: error)! as! [Item]
+            
+            let saveError: Error? = nil;
+            if self.coreDataStack.saveChanges(error: saveError) == false {
+                print("Failed to save the store! Error: \(saveError)")
+            }
             
             let privateQueueContext = self.coreDataStack.privateQueueContext
             privateQueueContext.performAndWait {
@@ -44,6 +49,15 @@ class ItemStore {
                     }
                 }
             }
+            
+            let mainQueueContext = self.coreDataStack.mainQueueContext
+            mainQueueContext.performAndWait {
+                if mainQueueContext.hasChanges {
+                    let saveError: Error? = nil
+                    self.coreDataStack.saveChanges(error: saveError)
+                }
+            }
+            
             completion(items)
         })
         task.resume()
@@ -51,7 +65,7 @@ class ItemStore {
     
     func processItemsRequestWithData(_ data: Data?, error: Error?) -> [AnyObject]? {
         if (data != nil) {
-            return ebayAPI.itemsFromJSONData(data!, inContext: self.coreDataStack.mainQueueContext)
+            return EbayAPI.itemsFromJSONData(data!, inContext: self.coreDataStack.mainQueueContext)
         }
         else {
             return nil;

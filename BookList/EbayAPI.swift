@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-internal struct ebayAPI {
+internal struct EbayAPI {
     
     static let ebayURL = "https://de-coding-test.s3.amazonaws.com/books.json"
     
@@ -50,16 +50,18 @@ internal struct ebayAPI {
             return nil;
         }
         
-        let item: Item
+        var item: Item? = nil
         
-        if author != nil && imageURL != nil {
-            item = Item(title: title!, author: author!, imageURL: imageURL!, context: context)
-        } else if author != nil {
-            item = Item(title: title!, author: author, context: context)
-        } else if imageURL != nil {
-            item = Item(title: title!, imageURL: imageURL, context: context)
-        } else {
-            item = Item(title: title!, context: context)
+        context.performAndWait {
+            if author != nil && imageURL != nil {
+                item = Item(title: title!, author: author!, imageURL: imageURL!, context: context)
+            } else if author != nil {
+                item = Item(title: title!, author: author, context: context)
+            } else if imageURL != nil {
+                item = Item(title: title!, imageURL: imageURL, context: context)
+            } else {
+                item = Item(title: title!, context: context)
+            }
         }
         
         return item
