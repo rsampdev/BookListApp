@@ -25,9 +25,8 @@ class ItemStore {
     }
     
     func fetchItemsWithCompletion(completion: @escaping ([Item]) -> Void ) {
-        let urlString = EbayAPI.ebayURL
-        let url = URL(string: urlString)
-        let request = URLRequest(url: url!)
+        let url = EbayAPI.convertUnsecureURLIntoSecureURL(URL(string: EbayAPI.ebayURL)!)
+        let request = URLRequest(url: url)
         let task = self.session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             let items = self.processItemsRequestWithData(data, error: error)! as! [Item]
             

@@ -47,14 +47,13 @@ class ItemsViewController: UIViewController, UITableViewDataSource {
         precondition(item?.title != nil || item?.title != "")
         cell.titleLabel?.text = item?.title
         
-        if item?.author == nil{
+        if item?.author == nil {
             cell.authorLabel?.isHidden = true
         } else {
             cell.authorLabel?.text = item?.author
             cell.authorLabel?.isHidden = false
         }
-        if item?.imageURL == nil{
-//            cell.itemImageView?.isHidden = true
+        if item?.imageURL == nil {
             cell.itemImageView?.backgroundColor = UIColor.red
         } else {
             cell.imageView?.image = self.imageStore?.imageForKey((item?.imageKey!)!)

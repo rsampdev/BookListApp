@@ -11,7 +11,7 @@ import CoreData
 
 internal struct EbayAPI {
     
-    static let ebayURL = "https://de-coding-test.s3.amazonaws.com/books.json"
+    static let ebayURL = "http://calm-mountain-87063.herokuapp.com/books.json"
     
     static func itemsFromJSONData(_ data: Data, inContext context: NSManagedObjectContext) -> [Item]? {
         var items = [Item]();
