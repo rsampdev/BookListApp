@@ -14,7 +14,7 @@ internal struct EbayAPI {
     static let ebayURL = "http://calm-mountain-87063.herokuapp.com/books.json"
     
     static func itemsFromJSONData(_ data: Data, inContext context: NSManagedObjectContext) -> [Item]? {
-        var items = [Item]();
+        var items = [Item]()
         var jsonArray: [[String: AnyObject]]?
         
         do {
@@ -23,7 +23,7 @@ internal struct EbayAPI {
             print(error)
         }
         
-        precondition(jsonArray != nil, "Json ")
+        precondition(jsonArray != nil, "Json can not be nil")
         var index = 0
         for jsonSinglePhotoDictionary: [String: AnyObject] in jsonArray! {
             let item: Item? = self.itemFromJSON(jsonSinglePhotoDictionary, inContext: context)
@@ -39,7 +39,7 @@ internal struct EbayAPI {
     static func itemFromJSON(_ jsonDict: [String:AnyObject], inContext context: NSManagedObjectContext) -> Item? {
         let title = jsonDict["title"] as! String?
         let author = jsonDict["author"] as! String?
-        let imageURLValue = jsonDict["imageURL"]
+        let imageURLValue = jsonDict["image_url"]
         var imageURL: URL? = nil
         
         if imageURLValue != nil {

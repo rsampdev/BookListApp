@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z7X-bX-rP8">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sII-yg-ZK5">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Items View Controller-->
+        <!--Book List-->
         <scene sceneID="R4h-Ah-Jar">
             <objects>
                 <viewController id="Z7X-bX-rP8" customClass="ItemsViewController" customModule="BookList" customModuleProvider="target" sceneMemberID="viewController">
@@ -24,7 +24,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ItemCell" rowHeight="55" id="UzP-bQ-p5i" customClass="ItemCell" customModule="BookList" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="55"/>
+                                        <rect key="frame" x="0.0" y="92" width="343" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UzP-bQ-p5i" id="g1o-qh-hcP">
                                             <frame key="frameInset" width="343" height="54.5"/>
@@ -56,7 +56,7 @@
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="EZe-eN-WFT" firstAttribute="height" relation="lessThanOrEqual" secondItem="cPp-cM-I2T" secondAttribute="height" id="msf-5q-f6x"/>
+                                                        <constraint firstItem="JbF-GE-k0X" firstAttribute="leading" secondItem="EZe-eN-WFT" secondAttribute="trailing" constant="4" id="Rwt-3E-vf4"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
@@ -80,15 +80,34 @@
                         <constraints>
                             <constraint firstItem="xgb-ne-v9Z" firstAttribute="leading" secondItem="0Rr-oi-eaY" secondAttribute="leadingMargin" id="0XE-9n-f8s"/>
                             <constraint firstItem="Zvt-zt-80w" firstAttribute="top" secondItem="xgb-ne-v9Z" secondAttribute="bottom" id="0ft-F9-dpk"/>
+                            <constraint firstItem="xgb-ne-v9Z" firstAttribute="top" secondItem="0Rr-oi-eaY" secondAttribute="topMargin" id="8IO-XJ-wV0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xgb-ne-v9Z" secondAttribute="trailing" id="HcM-lb-Jve"/>
-                            <constraint firstItem="xgb-ne-v9Z" firstAttribute="top" secondItem="p73-C6-JaE" secondAttribute="bottom" id="q8N-Y5-bTy"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Book List" id="4eh-cD-FTN"/>
                     <connections>
                         <outlet property="tableView" destination="xgb-ne-v9Z" id="Nb9-E7-moS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LwA-yq-c6Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="746.39999999999998" y="52.623688155922046"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Rcn-Z1-ho5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sII-yg-ZK5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d2t-56-FHE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Z7X-bX-rP8" kind="relationship" relationship="rootViewController" id="TcC-fa-AB9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HDS-do-ywT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-192.80000000000001" y="52.623688155922046"/>
         </scene>

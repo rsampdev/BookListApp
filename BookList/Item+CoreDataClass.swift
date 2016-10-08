@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-public class Item: NSManagedObject {
+internal class Item: NSManagedObject {
     
     convenience init(title: String, author: String?, imageURL: URL?, context: NSManagedObjectContext) {
         self.init(context: context)

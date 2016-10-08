@@ -9,26 +9,29 @@
 import UIKit
 
 class ItemsViewController: UIViewController, UITableViewDataSource {
-
+    
     var itemStore: ItemStore? = nil
     var imageStore: ImageStore? = nil
     @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        itemStore?.fetchItemsWithCompletion { (items: [Item]) -> Void in
-            print("Found \(items.count) items")
-            if (items.count == 0) {
-                print("Zero items! Sad times.");
-                return;
-            }
-            OperationQueue.main.addOperation {
-                self.itemStore?.items = items
-                self.imageStore = self.itemStore?.imageStore
-                self.tableView.reloadData()
+        
+        let privateQueue = OperationQueue()
+        privateQueue.addOperation {
+            self.itemStore?.fetchItemsWithCompletion { (items: [Item]) -> Void in
+                print("Found \(items.count) items")
+                if (items.count == 0) {
+                    print("Zero items! Sad times.");
+                    return;
+                }
+                OperationQueue.main.addOperation {
+                    self.itemStore?.items = items
+                    self.imageStore = self.itemStore?.imageStore
+                    self.tableView.reloadData()
+                }
             }
         }
-        
         tableView.dataSource = self
     }
     
@@ -53,9 +56,8 @@ class ItemsViewController: UIViewController, UITableViewDataSource {
             cell.authorLabel?.text = item?.author
             cell.authorLabel?.isHidden = false
         }
-        if item?.imageURL == nil {
-            cell.itemImageView?.backgroundColor = UIColor.red
-        } else {
+        
+        if item?.imageURL != nil {
             cell.imageView?.image = self.imageStore?.imageForKey((item?.imageKey!)!)
             cell.itemImageView?.isHidden = false
         }
